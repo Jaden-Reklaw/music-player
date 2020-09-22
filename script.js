@@ -79,7 +79,6 @@ const nextSong = () => {
     if(songIndex > songs.length -1) {
         songIndex = 0;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
     playSong();
 }
@@ -90,7 +89,6 @@ const prevSong = () => {
     if(songIndex < 0) {
         songIndex = songs.length - 1;
     }
-    console.log(songIndex);
     loadSong(songs[songIndex]);
     playSong();
 }
@@ -115,12 +113,22 @@ const updateProgressBar = (e) => {
         // Calculate Display for current
         const currentMinutes = Math.floor(currentTime/ 60);
         let currentSeconds = Math.floor(currentTime % 60);
-        if(durationSeconds < 10) {
+        if(currentSeconds < 10) {
             currentSeconds = `0${currentSeconds}`;
         }
         currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
     }
 }
+
+// Set Progress Bar
+function setProgressBar(e) {
+    const width = this.clientWidth;
+    console.log('width', width);
+    const clickX = e.offsetX;
+    console.log('clickX', clickX);
+}
+
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
+progressContainer.addEventListener('click', setProgressBar)
